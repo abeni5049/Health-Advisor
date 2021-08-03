@@ -64,32 +64,30 @@
         android:padding="8dp"
         android:text="Log in"
         android:textSize="16sp"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:layout_gravity="center"
         />
 
-    <View
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
 
-    <TextView
-        android:paddingTop="8dp"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="do not have an account?" />
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:text="Register"
-        android:textSize="16sp"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:layout_gravity="center"
-        />
+        <TextView
+            android:paddingTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="do not have an account? " />
+
+        <TextView
+            android:paddingTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple_700"
+            android:text=" Register " />
+
+    </LinearLayout>
 </LinearLayout>
