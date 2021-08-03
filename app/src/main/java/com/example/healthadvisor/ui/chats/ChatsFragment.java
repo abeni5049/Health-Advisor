@@ -9,16 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.healthadvisor.databinding.FragmentNotificationsBinding;
+import com.example.healthadvisor.databinding.FragmentChatsBinding;
 
 public class ChatsFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentChatsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentChatsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
