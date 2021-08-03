@@ -6,4 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="green">#00ff00</color>
+    <color name="list_divider">#e0e0e0</color>
 </resources>

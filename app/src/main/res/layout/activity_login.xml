@@ -28,7 +28,7 @@
     </LinearLayout>
 
 
-    //login text field
+<!--    //login text field-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernameTextField"
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    //password text field
+<!--    //password text field-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/outlinedTextField"
         android:layout_width="match_parent"
