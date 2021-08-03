@@ -5,4 +5,8 @@
         <item>FP Worker</item>
         <item>Physician</item>
     </string-array>
+    <string name="title_activity_mother">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
