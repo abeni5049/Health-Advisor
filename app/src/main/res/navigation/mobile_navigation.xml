@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.healthadvisor.ui.home.HomeFragment"
+        android:name="com.example.healthadvisor.ui.Posts.PostsFragment"
         android:label="@string/title_posts"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.healthadvisor.ui.dashboard.DashboardFragment"
+        android:name="com.example.healthadvisor.ui.appointment.AppointmentFragment"
         android:label="@string/title_appointment"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.healthadvisor.ui.notifications.NotificationsFragment"
+        android:name="com.example.healthadvisor.ui.chats.ChatsFragment"
         android:label="@string/title_chats"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

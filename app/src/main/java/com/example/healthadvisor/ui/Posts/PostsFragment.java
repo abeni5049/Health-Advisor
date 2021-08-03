@@ -1,4 +1,4 @@
-package com.example.healthadvisor.ui.notifications;
+package com.example.healthadvisor.ui.Posts;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,25 +7,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.healthadvisor.R;
-import com.example.healthadvisor.databinding.FragmentNotificationsBinding;
+import com.example.healthadvisor.databinding.FragmentHomeBinding;
 
-public class NotificationsFragment extends Fragment {
+public class PostsFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
+        final TextView textView = binding.textHome;
 
         return root;
     }
