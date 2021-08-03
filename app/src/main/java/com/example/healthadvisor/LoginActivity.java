@@ -2,11 +2,13 @@ package com.example.healthadvisor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 //TODO remove dark mode.
@@ -20,6 +22,12 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                 R.array.usertype_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        TextView register = findViewById(R.id.register);
+        register.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override

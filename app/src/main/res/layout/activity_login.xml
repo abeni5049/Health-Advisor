@@ -83,6 +83,7 @@
             android:text="do not have an account? " />
 
         <TextView
+            android:id="@+id/register"
             android:paddingTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
