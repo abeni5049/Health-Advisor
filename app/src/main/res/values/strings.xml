@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Health Advisor</string>
+    <string-array name="usertype_array">
+        <item>Mother</item>
+        <item>FP Worker</item>
+        <item>Physician</item>
+    </string-array>
+</resources>
