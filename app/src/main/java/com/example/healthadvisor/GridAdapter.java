@@ -6,18 +6,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
 public class GridAdapter extends BaseAdapter {
     Context context;
-    int logos[];
+    ArrayList<String> title;
+    ArrayList<String> info;
+    ArrayList<String> author;
+    ArrayList<String> date;
+
     LayoutInflater inflter;
-    public GridAdapter(Context applicationContext, int[] logos) {
+    public GridAdapter(Context applicationContext, ArrayList<String> title, ArrayList<String> info, ArrayList<String> author, ArrayList<String> date) {
         this.context = applicationContext;
-        this.logos = logos;
+        this.title = title;
+        this.info = info;
+        this.author = author;
+        this.date = date;
         inflter = (LayoutInflater.from(applicationContext));
     }
     @Override
     public int getCount() {
-        return logos.length;
+        return title.size();
     }
     @Override
     public Object getItem(int i) {
@@ -30,8 +41,19 @@ public class GridAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.activity_gridview, null); // inflate the layout
-        ImageView icon = (ImageView) view.findViewById(R.id.icon); // get the reference of ImageView
-        icon.setImageResource(logos[i]); // set logo images
+
+        TextView titleTextView = view.findViewById(R.id.title);
+        TextView infoTextView = view.findViewById(R.id.info);
+        TextView authorTextView = view.findViewById(R.id.author);
+        TextView dateTextView = view.findViewById(R.id.date);
+
+        titleTextView.setText( title.get(i));
+        infoTextView.setText( info.get(i));
+        authorTextView.setText( author.get(i));
+        dateTextView.setText( date.get(i));
+
+
+
         return view;
     }
 }
