@@ -9,17 +9,17 @@
         android:id="@+id/navigation_home"
         android:name="com.example.healthadvisor.ui.Posts.PostsFragment"
         android:label="@string/title_posts"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_posts" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.healthadvisor.ui.appointment.AppointmentFragment"
         android:label="@string/title_appointment"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_appointment" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.healthadvisor.ui.chats.ChatsFragment"
         android:label="@string/title_chats"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_chats" />
 </navigation>
