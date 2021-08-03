@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-//TODO remove dark mode
+//TODO remove dark mode.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
