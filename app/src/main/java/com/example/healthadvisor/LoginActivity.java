@@ -29,22 +29,21 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         Button loginButton = findViewById(R.id.login_button);
-        userType = 0;
         loginButton.setOnClickListener(v -> {
-            if (userType == 0) {
-                Intent intent = new Intent(LoginActivity.this, MotherActivity.class);
-                startActivity(intent);
-//                case 1:
-//                    Intent intent = new Intent(LoginActivity.this,FpWorkerActivity.class);
-//                      startActivity(intent);
+            userType = spinner.getSelectedItemPosition();
+            switch(userType) {
+                case 0:
+                    Intent intent = new Intent(LoginActivity.this, MotherActivity.class);
+                    startActivity(intent);
+                    break;
 //                case 2:
 //                    Intent intent = new Intent(LoginActivity.this,physician.class);
 //                startActivity(intent);
 //                case 3:
 //                    Intent intent = new Intent(LoginActivity.this,Admin.class);
 //                    startActivity(intent);
-            }else {
-                Toast.makeText(this, "error occurred", Toast.LENGTH_SHORT).show();
+                default:
+                    Toast.makeText(this, "error occurred "+userType, Toast.LENGTH_SHORT).show();
             }
         });
 
