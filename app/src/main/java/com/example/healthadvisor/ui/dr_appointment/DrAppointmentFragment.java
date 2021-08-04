@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.healthadvisor.PendingListAdapter;
 import com.example.healthadvisor.R;
+import com.example.healthadvisor.UpcomingListAdapter;
 import com.example.healthadvisor.databinding.FragmentAppointmentDrBinding;
 
 import java.util.ArrayList;
@@ -47,6 +48,16 @@ public class DrAppointmentFragment extends Fragment {
         PendingListAdapter adapter = new PendingListAdapter(getActivity(),username,reason,date);
         ListView listView = root.findViewById(R.id.pending_list);
         listView.setAdapter(adapter);
+
+        ArrayList<String> motherUsername = new ArrayList<>();
+        ArrayList<String>  date2 = new ArrayList<>();
+        for(int i = 0 ; i < 15 ;i++){
+            motherUsername.add("Mahlet Belay");
+            date2.add("5 july 2000");
+        }
+        UpcomingListAdapter adapter2 = new UpcomingListAdapter(getActivity(),motherUsername,date2);
+        ListView list2 = root.findViewById(R.id.upcoming_list);
+        list2.setAdapter(adapter2);
 
 
         return root;
