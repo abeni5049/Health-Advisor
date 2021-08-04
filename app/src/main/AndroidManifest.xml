@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthAdvisor">
-        <activity android:name=".MessageActivity"></activity>
+        <activity
+            android:name=".PhysicianActivity"
+            android:label="@string/title_activity_physician"></activity>
+        <activity android:name=".MessageActivity" />
         <activity
             android:name=".MotherActivity"
             android:label="@string/title_activity_mother" />

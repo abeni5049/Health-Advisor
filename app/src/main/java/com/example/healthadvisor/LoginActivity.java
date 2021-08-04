@@ -31,19 +31,22 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         Button loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(v -> {
             userType = spinner.getSelectedItemPosition();
+            Intent intent;
             switch(userType) {
                 case 0:
-                    Intent intent = new Intent(LoginActivity.this, MotherActivity.class);
+                    intent = new Intent(LoginActivity.this, MotherActivity.class);
                     startActivity(intent);
                     break;
-//                case 2:
-//                    Intent intent = new Intent(LoginActivity.this,physician.class);
-//                startActivity(intent);
+                case 2:
+                    intent = new Intent(LoginActivity.this,PhysicianActivity.class);
+                    startActivity(intent);
+                    break;
 //                case 3:
 //                    Intent intent = new Intent(LoginActivity.this,Admin.class);
 //                    startActivity(intent);
                 default:
                     Toast.makeText(this, "error occurred "+userType, Toast.LENGTH_SHORT).show();
+                    break;
             }
         });
 
