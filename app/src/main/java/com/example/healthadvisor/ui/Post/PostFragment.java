@@ -21,7 +21,7 @@ public class PostFragment extends Fragment {
         binding = FragmentPostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
+
 
         return root;
     }
