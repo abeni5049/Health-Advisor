@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthAdvisor">
+        <activity android:name=".FpActivity"></activity>
         <activity
             android:name=".PhysicianActivity"
-            android:label="@string/title_activity_physician"></activity>
+            android:label="@string/title_activity_physician" />
         <activity android:name=".MessageActivity" />
         <activity
             android:name=".MotherActivity"

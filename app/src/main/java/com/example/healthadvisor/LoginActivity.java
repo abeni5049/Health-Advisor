@@ -37,6 +37,10 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     intent = new Intent(LoginActivity.this, MotherActivity.class);
                     startActivity(intent);
                     break;
+                case 1:
+                    intent = new Intent(LoginActivity.this, FpActivity.class);
+                    startActivity(intent);
+                    break;
                 case 2:
                     intent = new Intent(LoginActivity.this,PhysicianActivity.class);
                     startActivity(intent);
