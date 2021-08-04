@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Log IN");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Log In");
 
         Spinner spinner = (Spinner) findViewById(R.id.usertype_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -45,9 +45,10 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     intent = new Intent(LoginActivity.this,PhysicianActivity.class);
                     startActivity(intent);
                     break;
-//                case 3:
-//                    Intent intent = new Intent(LoginActivity.this,Admin.class);
-//                    startActivity(intent);
+                case 3:
+                    intent = new Intent(LoginActivity.this,AdminActivity.class);
+                    startActivity(intent);
+                    break;
                 default:
                     Toast.makeText(this, "error occurred "+userType, Toast.LENGTH_SHORT).show();
                     break;
@@ -70,4 +71,5 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 }

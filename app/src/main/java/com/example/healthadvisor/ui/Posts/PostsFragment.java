@@ -1,16 +1,17 @@
 package com.example.healthadvisor.ui.Posts;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.healthadvisor.DetailActivity;
 import com.example.healthadvisor.GridAdapter;
 import com.example.healthadvisor.R;
 import com.example.healthadvisor.databinding.FragmentPostsBinding;
@@ -35,6 +36,7 @@ public class PostsFragment extends Fragment {
         info = new ArrayList<>();
         author = new ArrayList<>();
         date = new ArrayList<>();
+        String postId="";
         for(int i = 0 ; i < 30 ; i++){
             title.add("birth control");
             info.add("there are a lot of methods to control birth , among these using condom is the best");
@@ -48,10 +50,10 @@ public class PostsFragment extends Fragment {
         simpleGrid.setAdapter(customAdapter);
         // implement setOnItemClickListener event on GridView
         simpleGrid.setOnItemClickListener((parent, view, position, id) -> {
-//                // set an Intent to Another Activity
-//                Intent intent = new Intent(getContext(), SecondActivity.class);
-//                intent.putExtra("image", logos[position]); // put image data in Intent
-//                startActivity(intent); // start Intent
+            Toast.makeText(getContext(), "dhflks", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), DetailActivity.class);
+            intent.putExtra("post_id",postId); // put image data in Intent
+            startActivity(intent); // start Intent
         });
 
         return rootView;

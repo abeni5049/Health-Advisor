@@ -47,7 +47,7 @@
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:text="there are a lot of methods to control birth , among these using condom is the best"
+                    android:text="there are a lot of methods to control birth , among these using condom is the best lorem*100 "
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
                     />

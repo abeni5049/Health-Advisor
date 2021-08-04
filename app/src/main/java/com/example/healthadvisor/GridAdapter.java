@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,14 +16,14 @@ public class GridAdapter extends BaseAdapter {
     ArrayList<String> author;
     ArrayList<String> date;
 
-    LayoutInflater inflter;
+    LayoutInflater inflater;
     public GridAdapter(Context applicationContext, ArrayList<String> title, ArrayList<String> info, ArrayList<String> author, ArrayList<String> date) {
         this.context = applicationContext;
         this.title = title;
         this.info = info;
         this.author = author;
         this.date = date;
-        inflter = (LayoutInflater.from(applicationContext));
+        inflater = (LayoutInflater.from(applicationContext));
     }
     @Override
     public int getCount() {
@@ -40,7 +39,7 @@ public class GridAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflter.inflate(R.layout.activity_gridview, null); // inflate the layout
+        view = inflater.inflate(R.layout.activity_gridview, null); // inflate the layout
 
         TextView titleTextView = view.findViewById(R.id.title);
         TextView infoTextView = view.findViewById(R.id.info);

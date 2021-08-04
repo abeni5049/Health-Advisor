@@ -4,6 +4,7 @@
         <item>Mother</item>
         <item>FP Worker</item>
         <item>Physician</item>
+        <item>Admin</item>
     </string-array>
     <string name="title_activity_mother">MainActivity</string>
     <string name="title_posts">Posts</string>
