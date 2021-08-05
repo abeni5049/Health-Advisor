@@ -27,19 +27,19 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="229dp"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <!-- Title, author and date -->
                 <TextView
                     android:id="@+id/title"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="birth control"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
                 <TextView
                     android:id="@+id/info"
                     android:layout_width="wrap_content"
@@ -49,8 +49,8 @@
                     android:maxLines="3"
                     android:text="there are a lot of methods to control birth , among these using condom is the best"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary" />
+
                 <TextView
                     android:id="@+id/author"
                     android:layout_width="wrap_content"
@@ -58,8 +58,7 @@
                     android:layout_marginTop="16dp"
                     android:text="Author: doctor atnafu"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary" />
 
                 <TextView
                     android:id="@+id/date"
@@ -68,8 +67,7 @@
                     android:layout_marginTop="16dp"
                     android:text="Date: 5 July 200"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary" />
 
             </LinearLayout>
 
