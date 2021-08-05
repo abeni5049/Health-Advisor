@@ -15,6 +15,11 @@ import com.example.healthadvisor.MessageActivity;
 import com.example.healthadvisor.MessageListAdapter;
 import com.example.healthadvisor.R;
 import com.example.healthadvisor.databinding.FragmentChatsBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -35,15 +40,33 @@ public class ChatsFragment extends Fragment {
         latestMessage = new ArrayList<>();
         usertype = new ArrayList<>();
 
-        for(int i = 0 ; i < 15 ;i++){
-            userName.add("Dr. Abel");
-            latestMessage.add("Thank you for your advice");
-            usertype.add("Doctor");
-        }
 
         MessageListAdapter adapter = new MessageListAdapter(getActivity(),userName,latestMessage,usertype);
         list = rootView.findViewById(R.id.message_list);
         list.setAdapter(adapter);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef1 = database.getReference("users");
+        myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    String uname = ds.child("username").getValue(String.class);
+                    String utype = ds.child("userType").getValue(String.class);
+                    if(utype.equals("Physician") ||utype.equals("Fp Worker")  ) {
+                        userName.add(uname);
+                        latestMessage.add("Thank you for your advice");
+                        usertype.add(utype);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         list.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getContext(), MessageActivity.class);

@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
             String fullName = fullNameEditText.getText().toString();
             String gender = editTextFilledExposedDropdown.getText().toString();
             String dateOfBirth = dateTextField.getText().toString();
-            String phoneNumber = fullNameEditText.getText().toString();
+            String phoneNumber = phoneNumberEditText.getText().toString();
             String martialStatus = editTextFilledExposedDropdown3.getText().toString();
             String userType = editTextFilledExposedDropdown2.getText().toString();
             String username = usernameEditText.getText().toString();
