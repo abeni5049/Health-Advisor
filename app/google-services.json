@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "404220711000",
+    "firebase_url": "https://abeni-5b560.firebaseio.com",
+    "project_id": "abeni-5b560",
+    "storage_bucket": "abeni-5b560.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404220711000:android:2c303299c65aa1bd15fa2d",
+        "android_client_info": {
+          "package_name": "com.example.healthadvisor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404220711000-47t15mpf5uneagptilm0auq63sqje4rv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjlKs9RMReD3dz01Kwv579NIIaYxc1MIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404220711000-47t15mpf5uneagptilm0auq63sqje4rv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

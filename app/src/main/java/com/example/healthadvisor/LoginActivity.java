@@ -12,10 +12,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-//TODO remove dark mode.
+    // TODO : improve remove dark mode.
     private int userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
