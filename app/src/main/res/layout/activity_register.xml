@@ -163,6 +163,7 @@
 
 
     <Button
+        android:id="@+id/register_button"
         android:layout_margin="16dp"
         android:padding="8dp"
         android:text="Register"
