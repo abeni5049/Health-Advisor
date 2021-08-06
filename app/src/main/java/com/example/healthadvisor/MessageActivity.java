@@ -1,24 +1,19 @@
 package com.example.healthadvisor;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-
-import org.jetbrains.annotations.NotNull;
-
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -28,11 +23,17 @@ public class MessageActivity extends AppCompatActivity {
     EditText messageBox;
     MessageAdapter adapter;
     ImageView send;
+    private String user1username;
+    private String user2username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        Intent intent = getIntent();
+        user2username = intent.getStringExtra("username");
+
+        user1username = LoginActivity.username1;
 
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -56,9 +57,13 @@ public class MessageActivity extends AppCompatActivity {
 
         send.setOnClickListener(v -> {
             String message = messageBox.getText().toString().trim();
-            messageArray.add(message);
-            senderArray.add(true);
-            adapter.notifyDataSetChanged();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            String[] str = {user1username,user2username};
+            Arrays.sort(str);
+            String combinedUsername = str[0]+"-_-"+str[1];
+            DatabaseReference ref = database.getReference("chats").child(combinedUsername).push();
+            ref.child("message").setValue(message);
+            ref.child("sender").setValue(user1username);
             messageBox.setText("");
         });
 

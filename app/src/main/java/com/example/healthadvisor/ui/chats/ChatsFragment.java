@@ -47,13 +47,13 @@ public class ChatsFragment extends Fragment {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("users");
-        myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     String uname = ds.child("username").getValue(String.class);
                     String utype = ds.child("userType").getValue(String.class);
-                    if(utype.equals("Physician") ||utype.equals("Fp Worker")  ) {
+                    if(utype.equals("Physician") ||utype.equals("FP Worker")  ) {
                         userName.add(uname);
                         latestMessage.add("Thank you for your advice");
                         usertype.add(utype);
