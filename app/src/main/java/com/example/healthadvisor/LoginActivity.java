@@ -55,12 +55,14 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     boolean isCorrect = false;
+                    String fName="";
                     for(DataSnapshot ds : snapshot.getChildren()) {
-                        String uname = ds.child("username").getValue(String.class);
+                        String uName = ds.child("username").getValue(String.class);
+                        fName = ds.child("fullName").getValue(String.class);
                         String pass = ds.child("password").getValue(String.class);
                         String utype = ds.child("userType").getValue(String.class);
                         if(utype.equals(userType)) {
-                            if (uname.equals(username) && pass.equals(password)) {
+                            if (uName.equals(username) && pass.equals(password)) {
                                 isCorrect = true;
                                 break;
                             }
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                 break;
                             case "Physician":
                                 intent = new Intent(LoginActivity.this,PhysicianActivity.class);
+                                intent.putExtra("fullName",fName);
                                 startActivity(intent);
                                 break;
                             case "Admin":

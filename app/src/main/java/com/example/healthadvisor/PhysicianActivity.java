@@ -1,5 +1,6 @@
 package com.example.healthadvisor;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +16,7 @@ import com.example.healthadvisor.databinding.ActivityPhysicianBinding;
 public class PhysicianActivity extends AppCompatActivity {
 
     private ActivityPhysicianBinding binding;
+    public static String physicianFullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,10 @@ public class PhysicianActivity extends AppCompatActivity {
 
         binding = ActivityPhysicianBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = getIntent();
+        physicianFullName = intent.getStringExtra("fullName");
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
