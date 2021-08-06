@@ -1,5 +1,6 @@
 package com.example.healthadvisor;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.healthadvisor.databinding.ActivityFpBinding;
@@ -16,13 +17,15 @@ import com.example.healthadvisor.databinding.ActivityMotherBinding;
 public class FpActivity extends AppCompatActivity {
 
     private ActivityFpBinding binding;
-
+    public static String FpFullName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityFpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Intent intent = getIntent();
+        FpFullName = intent.getStringExtra("FpFullName");
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         AutoCompleteTextView editTextFilledExposedDropdown = findViewById(R.id.gender_dropdown);
         editTextFilledExposedDropdown.setAdapter(adapter);
 
-        String[] usertype = new String[] {"Mother", "Physician" ,"Fp Worker","Admin"};
+        String[] usertype = new String[] {"Mother", "Physician" ,"FP Worker","Admin"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, usertype);
         AutoCompleteTextView editTextFilledExposedDropdown2 = findViewById(R.id.user_type_dropdown);
         editTextFilledExposedDropdown2.setAdapter(adapter2);

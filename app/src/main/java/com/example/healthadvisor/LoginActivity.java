@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Log In");
 
-        String[] usertype = new String[] {"Mother", "FP worker","Physician","Admin"};
+        String[] usertype = new String[] {"Mother", "FP Worker","Physician","Admin"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, usertype);
         AutoCompleteTextView usertypeEditText = findViewById(R.id.gender_dropdown);
         usertypeEditText.setAdapter(adapter);
@@ -74,10 +74,12 @@ public class LoginActivity extends AppCompatActivity {
                         switch(userType) {
                             case "Mother":
                                 intent = new Intent(LoginActivity.this, MotherActivity.class);
+                                intent.putExtra("motherUsername",username);
                                 startActivity(intent);
                                 break;
-                            case "FP worker":
+                            case "FP Worker":
                                 intent = new Intent(LoginActivity.this, FpActivity.class);
+                                intent.putExtra("FpFullName",fName);
                                 startActivity(intent);
                                 break;
                             case "Physician":

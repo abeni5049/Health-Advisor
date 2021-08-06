@@ -30,10 +30,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:hint="Doctor userName"
+                        android:hint="Physician userName"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/physician_username_text_field"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
@@ -41,7 +42,6 @@
 
                     <!--                    select date text field-->
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/dateTextField"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -49,13 +49,19 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/dateTextField"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
-                        android:id="@+id/login_button"
+                        android:id="@+id/request_button"
                         android:layout_margin="16dp"
                         android:padding="8dp"
                         android:text="Request Appointment"
