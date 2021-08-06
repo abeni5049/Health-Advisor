@@ -24,12 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
-    // TODO : improve remove dark mode.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Log In");
+
+
 
         String[] usertype = new String[] {"Mother", "FP Worker","Physician","Admin"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, usertype);
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                             case "Physician":
                                 intent = new Intent(LoginActivity.this,PhysicianActivity.class);
                                 intent.putExtra("fullName",fName);
+                                intent.putExtra("physicianUsername",username);
                                 startActivity(intent);
                                 break;
                             case "Admin":

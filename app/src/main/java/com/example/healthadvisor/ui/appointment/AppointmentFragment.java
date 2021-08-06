@@ -68,7 +68,7 @@ public class AppointmentFragment extends Fragment {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("appointments");
-        myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
@@ -138,6 +138,7 @@ public class AppointmentFragment extends Fragment {
                         myRef.child("physicianUsername").setValue(physicianUsername);
                         myRef.child("date").setValue(date);
                         myRef.child("status").setValue("pending");
+                        myRef.child("appointmentID").setValue(myRef.getKey());
                         myRef.child("motherUsername").setValue(motherUsername);
                     }else{
                         Toast.makeText(getContext(), "this username does not exist", Toast.LENGTH_SHORT).show();

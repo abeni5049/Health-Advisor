@@ -17,6 +17,8 @@ public class PhysicianActivity extends AppCompatActivity {
 
     private ActivityPhysicianBinding binding;
     public static String physicianFullName;
+    public static String physicianUsername;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class PhysicianActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         physicianFullName = intent.getStringExtra("fullName");
+        physicianUsername = intent.getStringExtra("physicianUsername");
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
