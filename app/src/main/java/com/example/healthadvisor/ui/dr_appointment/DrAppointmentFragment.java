@@ -97,7 +97,7 @@ public class DrAppointmentFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 motherUsername.clear();
                 date2.clear();
-                adapter.notifyDataSetChanged();
+                adapter2.notifyDataSetChanged();
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     String str = ds.child("physicianUsername").getValue(String.class);
                     String statusString = ds.child("status").getValue(String.class);
