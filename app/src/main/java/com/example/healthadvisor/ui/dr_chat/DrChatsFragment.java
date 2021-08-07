@@ -49,15 +49,11 @@ public class DrChatsFragment extends Fragment {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("chats");
-        myRef1.addValueEventListener(new ValueEventListener() {
+        myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     try {
-                        userName.clear();
-                        latestMessage.clear();
-                        usertype.clear();
-                        adapter.notifyDataSetChanged();
                         String combinedUsername = ds.getKey();
                         String[] usernames = combinedUsername.split("-_-");
                         if(username1!=null)
