@@ -77,7 +77,6 @@ public class PostsFragment extends Fragment {
 
         // implement setOnItemClickListener event on GridView
         simpleGrid.setOnItemClickListener((parent, view, position, id) -> {
-            Toast.makeText(getContext(), "dhflks", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getContext(), DetailActivity.class);
             intent.putExtra("post_id",postId); // put image data in Intent
             startActivity(intent); // start Intent

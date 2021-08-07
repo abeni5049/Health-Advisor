@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="1dp"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
@@ -15,9 +16,6 @@
         app:cardCornerRadius="16dp"
         android:layout_height="200dp"
         android:layout_margin="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:checkable="true"
         >
 
         <LinearLayout
