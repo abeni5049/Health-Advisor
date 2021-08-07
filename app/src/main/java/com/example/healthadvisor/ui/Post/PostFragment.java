@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,6 +50,18 @@ public class PostFragment extends Fragment {
             myRef.child("author").setValue(author);
             myRef.child("postID").setValue(myRef.getKey());
         });
+
+        TabHost tabs = root.findViewById(R.id.tabhost);
+        tabs.setup();
+        TabHost.TabSpec spec = tabs.newTabSpec("tag1");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("post");
+        tabs.addTab(spec);
+        spec = tabs.newTabSpec("tag2");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("your posts");
+        tabs.addTab(spec);
+
         return root;
     }
 

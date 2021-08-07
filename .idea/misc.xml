@@ -6,12 +6,15 @@
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/activity_gridview.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_mother.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/activity_physician.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_appointment_dr.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_post.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_post2.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/pending_list_item.xml" value="0.16927083333333334" />
       </map>
     </option>

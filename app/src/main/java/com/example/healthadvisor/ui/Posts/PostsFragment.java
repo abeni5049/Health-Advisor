@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,7 @@ public class PostsFragment extends Fragment {
     ArrayList<String> author;
     ArrayList<String> date;
     ArrayList<String> postID;
-    GridView simpleGrid;
+    ListView simpleGrid;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
