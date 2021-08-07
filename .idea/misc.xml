@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_mother.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/activity_physician.xml" value="0.16927083333333334" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_appointment_dr.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.16927083333333334" />
