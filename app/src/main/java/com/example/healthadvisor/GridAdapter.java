@@ -15,14 +15,16 @@ public class GridAdapter extends BaseAdapter {
     ArrayList<String> info;
     ArrayList<String> author;
     ArrayList<String> date;
+    ArrayList<String> postID;
 
     LayoutInflater inflater;
-    public GridAdapter(Context applicationContext, ArrayList<String> title, ArrayList<String> info, ArrayList<String> author, ArrayList<String> date) {
+    public GridAdapter(Context applicationContext, ArrayList<String> title, ArrayList<String> info, ArrayList<String> author, ArrayList<String> date,ArrayList<String> postID) {
         this.context = applicationContext;
         this.title = title;
         this.info = info;
         this.author = author;
         this.date = date;
+        this.postID = postID;
         inflater = (LayoutInflater.from(applicationContext));
     }
     @Override

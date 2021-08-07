@@ -47,6 +47,7 @@ public class PostFragment extends Fragment {
             myRef.child("info").setValue(info);
             myRef.child("date").setValue(currentDateString);
             myRef.child("author").setValue(author);
+            myRef.child("postID").setValue(myRef.getKey());
         });
         return root;
     }

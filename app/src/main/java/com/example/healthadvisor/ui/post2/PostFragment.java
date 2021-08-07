@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -45,6 +46,7 @@ private FragmentPost2Binding binding;
         myRef.child("info").setValue(info);
         myRef.child("date").setValue(currentDateString);
         myRef.child("author").setValue(author);
+        myRef.child("postID").setValue(myRef.getKey());
     });
         return root;
     }
