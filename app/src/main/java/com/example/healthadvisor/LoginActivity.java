@@ -2,7 +2,10 @@ package com.example.healthadvisor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -15,6 +18,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,70 +45,78 @@ public class LoginActivity extends AppCompatActivity {
 
         Button loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(v -> {
+            if(!isNetworkAvailable(this)){
+                Toast.makeText(this, "Please connect to the internet", Toast.LENGTH_SHORT).show();
+            }else {
+                loginButton.setEnabled(false);
+                String username = usernameEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+                String userType = usertypeEditText.getText().toString().trim();
 
-            String username = usernameEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
-            String userType = usertypeEditText.getText().toString();
 
-
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef1 = database.getReference("users");
-            myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    boolean isCorrect = false;
-                    String fName="";
-                    for(DataSnapshot ds : snapshot.getChildren()) {
-                        String uName = ds.child("username").getValue(String.class);
-                        fName = ds.child("fullName").getValue(String.class);
-                        String pass = ds.child("password").getValue(String.class);
-                        String utype = ds.child("userType").getValue(String.class);
-                        if(utype.equals(userType)) {
-                            if (uName.equals(username) && pass.equals(password)) {
-                                isCorrect = true;
-                                break;
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef1 = database.getReference("users");
+                myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        boolean isCorrect = false;
+                        String fName = "";
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            String uName = ds.child("username").getValue(String.class);
+                            fName = ds.child("fullName").getValue(String.class);
+                            String pass = ds.child("password").getValue(String.class);
+                            String utype = ds.child("userType").getValue(String.class);
+                            if (utype.equals(userType)) {
+                                if (uName.equals(username) && pass.equals(password)) {
+                                    isCorrect = true;
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    if(isCorrect){
-                        username1 = username;
-                        Intent intent;
-                        switch(userType) {
-                            case "Mother":
-                                intent = new Intent(LoginActivity.this, MotherActivity.class);
-                                intent.putExtra("motherUsername",username);
-                                startActivity(intent);
-                                break;
-                            case "FP Worker":
-                                intent = new Intent(LoginActivity.this, FpActivity.class);
-                                intent.putExtra("FpFullName",fName);
-                                startActivity(intent);
-                                break;
-                            case "Physician":
-                                intent = new Intent(LoginActivity.this,PhysicianActivity.class);
-                                intent.putExtra("fullName",fName);
-                                intent.putExtra("physicianUsername",username);
-                                startActivity(intent);
-                                break;
-                            case "Admin":
-                                intent = new Intent(LoginActivity.this,AdminActivity.class);
-                                startActivity(intent);
-                                break;
-                            default:
-                                Toast.makeText(LoginActivity.this, "error occurred "+userType, Toast.LENGTH_SHORT).show();
-                                break;
+                        if (isCorrect) {
+                            username1 = username;
+                            Intent intent;
+                            switch (userType) {
+                                case "Mother":
+                                    intent = new Intent(LoginActivity.this, MotherActivity.class);
+                                    intent.putExtra("motherUsername", username);
+                                    startActivity(intent);
+                                    break;
+                                case "FP Worker":
+                                    intent = new Intent(LoginActivity.this, FpActivity.class);
+                                    intent.putExtra("FpFullName", fName);
+                                    startActivity(intent);
+                                    break;
+                                case "Physician":
+                                    intent = new Intent(LoginActivity.this, PhysicianActivity.class);
+                                    intent.putExtra("fullName", fName);
+                                    intent.putExtra("physicianUsername", username);
+                                    startActivity(intent);
+                                    break;
+                                case "Admin":
+                                    intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                    startActivity(intent);
+                                    break;
+                                default:
+                                    Toast.makeText(LoginActivity.this, "error occurred " + userType, Toast.LENGTH_SHORT).show();
+                                    break;
+
+                            }
+                            loginButton.setEnabled(true);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "incorrect username or password", Toast.LENGTH_SHORT).show();
+                            loginButton.setEnabled(true);
                         }
-                    }else{
-                        Toast.makeText(LoginActivity.this, "incorrect username or password", Toast.LENGTH_SHORT).show();
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(LoginActivity.this, "error occurred , please check your internet connection", Toast.LENGTH_SHORT).show();
+                        loginButton.setEnabled(true);
+                    }
+                });
+            }
             
         });
 
@@ -112,4 +126,9 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.healthadvisor.ui.Posts;
-
+//TODO empty list view
+//TODO progress bar
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
