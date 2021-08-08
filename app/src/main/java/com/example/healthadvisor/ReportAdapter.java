@@ -1,6 +1,7 @@
 package com.example.healthadvisor;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class ReportAdapter extends ArrayAdapter<String> {
 
@@ -18,7 +18,7 @@ public class ReportAdapter extends ArrayAdapter<String> {
     private final ArrayList<String> value;
 
     public ReportAdapter(@NonNull Activity context, ArrayList<String> metrics,ArrayList<String> value) {
-        super(context, R.layout.admin_list_item,metrics);
+        super(context, R.layout.report_list_item,metrics);
         this.context = context;
         this.metrics = metrics;
         this.value = value;
@@ -26,7 +26,7 @@ public class ReportAdapter extends ArrayAdapter<String> {
 
     public View getView(int position , View view, ViewGroup parent){
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.report_list_item,null,true);
+        @SuppressLint({"ViewHolder", "InflateParams"}) View rowView = inflater.inflate(R.layout.report_list_item,null,true);
 
         TextView metricsTextView = rowView.findViewById(R.id.metrics);
         TextView valueTextView = rowView.findViewById(R.id.value);

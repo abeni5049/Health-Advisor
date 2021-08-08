@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,7 +29,6 @@ public class MessageActivity extends AppCompatActivity {
     MessageAdapter adapter;
     ImageView send;
     private String user1username;
-    private String user2username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +36,7 @@ public class MessageActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        user2username = intent.getStringExtra("username");
+        String user2username = intent.getStringExtra("username");
         user1username = LoginActivity.username1;
         String[] str = {user1username,user2username};
         Arrays.sort(str);
@@ -78,6 +76,7 @@ public class MessageActivity extends AppCompatActivity {
                         String messageStr = ds.child("message").getValue(String.class);
                         String senderStr = ds.child("sender").getValue(String.class);
                         boolean sender = false;
+                        if(senderStr!=null)
                         if (senderStr.equals(user1username)) {
                             sender = true;
                         }

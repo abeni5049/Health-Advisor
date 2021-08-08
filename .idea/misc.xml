@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/message_action_bar.xml" value="0.25" />
         <entry key="app/src/main/res/layout/message_list_item.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/pending_list_item.xml" value="0.16927083333333334" />
-        <entry key="app/src/main/res/layout/report_list_item.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/report_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/menu/profile.xml" value="0.16927083333333334" />
       </map>
     </option>

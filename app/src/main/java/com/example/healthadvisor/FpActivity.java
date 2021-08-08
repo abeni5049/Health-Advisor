@@ -15,8 +15,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.healthadvisor.databinding.ActivityMotherBinding;
-
 public class FpActivity extends AppCompatActivity {
 
     private ActivityFpBinding binding;

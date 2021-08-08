@@ -1,5 +1,6 @@
 package com.example.healthadvisor;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -30,7 +31,7 @@ public class MessageAdapter extends ArrayAdapter<String> {
 
     public View getView(int position , View view, ViewGroup parent){
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.message_box,null,true);
+        @SuppressLint({"ViewHolder", "InflateParams"}) View rowView = inflater.inflate(R.layout.message_box,null,true);
         TextView messageTextView = rowView.findViewById(R.id.message);
         messageTextView.setText(message.get(position));
         RelativeLayout container = rowView.findViewById(R.id.message_container);

@@ -11,7 +11,7 @@
         android:id="@+id/metrics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="birke worku"
+        android:text="@string/birke_worku"
         android:layout_centerVertical="true"
         android:textStyle="bold"
         android:textSize="16sp"
@@ -21,12 +21,13 @@
         android:id="@+id/value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12"
+        android:text="@string/_12"
         android:layout_marginRight="32dp"
         android:textStyle="bold"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="32dp" />
 
 </RelativeLayout>

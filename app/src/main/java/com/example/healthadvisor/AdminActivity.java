@@ -78,7 +78,7 @@ public class AdminActivity extends AppCompatActivity {
         ArrayList<String> metricsList = new ArrayList<>();
         ArrayList<String> valueList = new ArrayList<>();
 
-        AdminListAdapter reportAdapter = new AdminListAdapter(this,metricsList,valueList);
+        ReportAdapter reportAdapter = new ReportAdapter(this,metricsList,valueList);
         ListView reportList = findViewById(R.id.report_list);
         reportList.setAdapter(reportAdapter);
 

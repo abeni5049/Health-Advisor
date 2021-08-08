@@ -1,5 +1,6 @@
 package com.example.healthadvisor;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ public class UpcomingListAdapter extends ArrayAdapter<String> {
 
     public View getView(int position , View view, ViewGroup parent){
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.upcoming_list_item,null,true);
+        @SuppressLint({"ViewHolder", "InflateParams"}) View rowView = inflater.inflate(R.layout.upcoming_list_item,null,true);
 
         TextView motherTextView = rowView.findViewById(R.id.mother_name);
         TextView dateTextView = rowView.findViewById(R.id.date);
