@@ -2,8 +2,12 @@ package com.example.healthadvisor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -175,8 +179,21 @@ public class AdminActivity extends AppCompatActivity {
             return false;
         });
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.profile,menu);
+        return true;
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.item1){
+            Intent intent = new Intent(AdminActivity.this,ProfileActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 }

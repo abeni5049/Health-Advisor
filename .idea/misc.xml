@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_mother.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/activity_physician.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="app/src/main/res/layout/admin_list_item.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_appointment.xml" value="0.16927083333333334" />
@@ -20,6 +21,7 @@
         <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/pending_list_item.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/report_list_item.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/menu/profile.xml" value="0.16927083333333334" />
       </map>
     </option>
   </component>
