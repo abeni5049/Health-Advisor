@@ -50,11 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
         AutoCompleteTextView editTextFilledExposedDropdown = findViewById(R.id.gender_dropdown);
         editTextFilledExposedDropdown.setAdapter(adapter);
 
-        String[] usertype = new String[] {"Mother", "Physician" ,"FP Worker","Admin"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, usertype);
-        AutoCompleteTextView editTextFilledExposedDropdown2 = findViewById(R.id.user_type_dropdown);
-        editTextFilledExposedDropdown2.setAdapter(adapter2);
-
         String[] martialStatusArray = new String[] {"Single", "Married","Divorced" ,"Widow"};
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, martialStatusArray);
         AutoCompleteTextView editTextFilledExposedDropdown3 = findViewById(R.id.martial_dropdown);
@@ -79,13 +74,11 @@ public class ProfileActivity extends AppCompatActivity {
                         usernameEditText.setText(uName);
                         fullNameEditText.setText(fName);
                         passwordEditText.setText(password);
-                        editTextFilledExposedDropdown2.setText(uType);
                         dateTextField.setText(dateOfBirth);
                         editTextFilledExposedDropdown.setText(gender);
                         editTextFilledExposedDropdown3.setText(martialStatus);
                         phoneNumberEditText.setText(phoneNumber);
                         adapter.getFilter().filter(null);
-                        adapter2.getFilter().filter(null);
                         adapter3.getFilter().filter(null);
                     }
                 }
@@ -105,7 +98,6 @@ public class ProfileActivity extends AppCompatActivity {
             String dateOfBirth = dateTextField.getText().toString();
             String phoneNumber = phoneNumberEditText.getText().toString();
             String martialStatus = editTextFilledExposedDropdown3.getText().toString();
-            String userType = editTextFilledExposedDropdown2.getText().toString();
             String newUsername = usernameEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
@@ -124,7 +116,6 @@ public class ProfileActivity extends AppCompatActivity {
                                 isTaken = true;
                                 break;
                             }
-                         //   LoginActivity.username1 = uName;
                         }
                     }
 
@@ -137,7 +128,6 @@ public class ProfileActivity extends AppCompatActivity {
                         myRef.child("dateOfBirth").setValue(dateOfBirth);
                         myRef.child("phoneNumber").setValue(phoneNumber);
                         myRef.child("martialStatus").setValue(martialStatus);
-                        myRef.child("userType").setValue(userType);
                         myRef.child("username").setValue(newUsername);
                         LoginActivity.username1 = newUsername;
                         myRef.child("password").setValue(password);
