@@ -3,11 +3,10 @@ package com.example.healthadvisor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,16 +20,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
@@ -45,7 +41,7 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-        getSupportActionBar().setTitle("Admin");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Admin");
         
         username = new ArrayList<>();
         userType = new ArrayList<>();
@@ -87,12 +83,12 @@ public class AdminActivity extends AppCompatActivity {
         reportList.setAdapter(reportAdapter);
 
         myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
-            int numberOfUsers=0,numberOfMothers=0,numberOfPhysicians=0,numberOfFpWorkers=0,numberOfAdmins=0;
+            int numberOfMothers=0,numberOfPhysicians=0,numberOfFpWorkers=0,numberOfAdmins=0;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     String uType = ds.child("userType").getValue(String.class);
-                    switch (uType){
+                    switch (Objects.requireNonNull(uType)){
                         case "Mother":
                             numberOfMothers++;
                             break;
@@ -188,16 +184,16 @@ public class AdminActivity extends AppCompatActivity {
         EditText phoneNumberEditText = findViewById(R.id.phoneNumberTextField);
 
         String[] Genders = new String[] {"Male", "Female"};
-        ArrayAdapter<String> adapter11 = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, Genders);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, Genders);
         AutoCompleteTextView editTextFilledExposedDropdown = findViewById(R.id.gender_dropdown);
-        editTextFilledExposedDropdown.setAdapter(adapter11);
+        editTextFilledExposedDropdown.setAdapter(adapter1);
 
-        String[] usertype = new String[] {"Mother", "Physician" ,"FP Worker","Admin"};
+        String[] usertype = new String[] {"Physician" ,"FP Worker","Admin"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, usertype);
         AutoCompleteTextView editTextFilledExposedDropdown2 = findViewById(R.id.user_type_dropdown);
         editTextFilledExposedDropdown2.setAdapter(adapter2);
 
-        String[] martialStatusArray = new String[] {"Single", "Married","Divorced" ,"Widow"};
+        String[] martialStatusArray = new String[] {"Single", "Married","Divorced" ,"Widowed"};
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, martialStatusArray);
         AutoCompleteTextView editTextFilledExposedDropdown3 = findViewById(R.id.martial_dropdown);
         editTextFilledExposedDropdown3.setAdapter(adapter3);
@@ -206,7 +202,7 @@ public class AdminActivity extends AppCompatActivity {
         registerButton.setOnClickListener(v -> {
             String fullName = fullNameEditText.getText().toString().trim();
             String gender = editTextFilledExposedDropdown.getText().toString().trim();
-            String dateOfBirth = dateTextField.getText().toString().trim();
+            String dateOfBirth = Objects.requireNonNull(dateTextField.getText()).toString().trim();
             String phoneNumber = phoneNumberEditText.getText().toString().trim();
             String martialStatus = editTextFilledExposedDropdown3.getText().toString().trim();
             String userType = editTextFilledExposedDropdown2.getText().toString().trim();
@@ -223,7 +219,6 @@ public class AdminActivity extends AppCompatActivity {
                 Toast.makeText(this,"all fields are required",Toast.LENGTH_SHORT).show();
             }else {
                 registerButton.setEnabled(false);
-                // Write a user to the database
                 DatabaseReference userRef = database.getReference("users");
                 userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -231,6 +226,7 @@ public class AdminActivity extends AppCompatActivity {
                         boolean isTaken = false;
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             String str = ds.child("username").getValue(String.class);
+                            if(str!=null)
                             if (str.equals(username)) {
                                 isTaken = true;
                                 break;
@@ -248,12 +244,9 @@ public class AdminActivity extends AppCompatActivity {
                             myRef.child("martialStatus").setValue(martialStatus);
                             myRef.child("userType").setValue(userType);
                             myRef.child("username").setValue(username);
-                            myRef.child("password").setValue(password).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    registerButton.setEnabled(true);
-                                    Toast.makeText(AdminActivity.this, "successfully registered", Toast.LENGTH_SHORT).show();
-                                }
+                            myRef.child("password").setValue(password).addOnCompleteListener(task -> {
+                                registerButton.setEnabled(true);
+                                Toast.makeText(AdminActivity.this, "successfully registered", Toast.LENGTH_SHORT).show();
                             });
                         }
                     }
@@ -280,9 +273,7 @@ public class AdminActivity extends AppCompatActivity {
                                 ds.getRef().removeValue();
                                 Toast.makeText(getApplicationContext(), "account deleted", Toast.LENGTH_SHORT).show();
                             });
-                            builder.setNegativeButton("No", (dialog, id12) -> {
-                                dialog.cancel();
-                            });
+                            builder.setNegativeButton("No", (dialog, id12) -> dialog.cancel());
                             AlertDialog dialog = builder.create();
                             dialog.setTitle("Delete User");
                             dialog.setMessage("Do you want to delete Account of "+usernameStr+" ?");
@@ -315,30 +306,34 @@ public class AdminActivity extends AppCompatActivity {
             Intent intent = new Intent(AdminActivity.this,ProfileActivity.class);
             startActivity(intent);
         }
+        else if(id==R.id.item2){
+            Intent intent = new Intent(AdminActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new RegisterActivity.DatePickerFragment();
+        DialogFragment newFragment = new AdminActivity.DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "DatePicker");
     }
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
+            int year = c.get(Calendar.YEAR)-30;
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-
-            // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
+        @SuppressLint("SetTextI18n")
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            dateTextField.setText(day+" / "+month+" / "+year);
+            String monthName = new DateFormatSymbols().getMonths()[month];
+            dateTextField.setText(day+"  "+monthName+"  "+year);
         }
     }
 }

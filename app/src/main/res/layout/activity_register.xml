@@ -8,7 +8,7 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="8dp"
     android:orientation="vertical"
     android:gravity="center"
@@ -26,24 +26,6 @@
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/gender"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:hint="Gender">
-
-        <AutoCompleteTextView
-            android:id="@+id/gender_dropdown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,22 +83,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menu3"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="user type">
-
-        <AutoCompleteTextView
-            android:id="@+id/user_type_dropdown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -153,7 +119,7 @@
 
     <Button
         android:id="@+id/register_button"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:padding="8dp"
         android:text="Register"
         android:textSize="16sp"
@@ -165,6 +131,7 @@
 
 
     <LinearLayout
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

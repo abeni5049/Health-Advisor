@@ -59,6 +59,10 @@ public class PhysicianActivity extends AppCompatActivity {
             Intent intent = new Intent(PhysicianActivity.this,ProfileActivity.class);
             startActivity(intent);
         }
+        else if(id==R.id.item2){
+            Intent intent = new Intent(PhysicianActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 

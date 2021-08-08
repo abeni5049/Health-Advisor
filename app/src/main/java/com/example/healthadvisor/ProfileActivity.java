@@ -3,10 +3,9 @@ package com.example.healthadvisor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,20 +13,17 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
+import java.util.Objects;
 
-import static java.security.AccessController.getContext;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -62,10 +58,10 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     String uName = ds.child("username").getValue(String.class);
+                    if(uName!=null)
                     if(uName.equals(LoginActivity.username1)) {
                         String fName = ds.child("fullName").getValue(String.class);
                         String password = ds.child("password").getValue(String.class);
-                        String uType = ds.child("userType").getValue(String.class);
                         String dateOfBirth = ds.child("dateOfBirth").getValue(String.class);
                         String gender = ds.child("gender").getValue(String.class);
                         String martialStatus = ds.child("martialStatus").getValue(String.class);
@@ -95,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
         updateButton.setOnClickListener(v -> {
             String fullName = fullNameEditText.getText().toString();
             String gender = editTextFilledExposedDropdown.getText().toString();
-            String dateOfBirth = dateTextField.getText().toString();
+            String dateOfBirth = Objects.requireNonNull(dateTextField.getText()).toString();
             String phoneNumber = phoneNumberEditText.getText().toString();
             String martialStatus = editTextFilledExposedDropdown3.getText().toString();
             String newUsername = usernameEditText.getText().toString();
@@ -110,6 +106,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String currentUseSnapshot="unknown";
                     for(DataSnapshot ds : snapshot.getChildren()) {
                         String uName = ds.child("username").getValue(String.class);
+                        if(uName!=null)
                         if(uName.equals(LoginActivity.username1)) {
                             currentUseSnapshot = ds.getKey();
                             if (uName.equals(newUsername) && !(newUsername.equals(LoginActivity.username1))) {
@@ -121,7 +118,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     if(isTaken){
                         Toast.makeText(ProfileActivity.this, "this username is taken", Toast.LENGTH_SHORT).show();
-                    }else {
+                    }else if(currentUseSnapshot!=null){
                         DatabaseReference myRef = database.getReference("users").child(currentUseSnapshot);
                         myRef.child("fullName").setValue(fullName);
                         myRef.child("gender").setValue(gender);
@@ -153,20 +150,20 @@ public class ProfileActivity extends AppCompatActivity {
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
+            int year = c.get(Calendar.YEAR)-30;
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-
-            // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
+        @SuppressLint("SetTextI18n")
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            dateTextField.setText(day+" / "+month+" / "+year);
+            String monthName = new DateFormatSymbols().getMonths()[month];
+            dateTextField.setText(day+"  "+monthName+"  "+year);
         }
     }
 }

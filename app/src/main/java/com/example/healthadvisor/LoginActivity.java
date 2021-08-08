@@ -18,13 +18,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     public static  String username1;
+    private  ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         String[] usertype = new String[] {"Mother", "FP Worker","Physician","Admin"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, usertype);
+        adapter = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, usertype);
         AutoCompleteTextView usertypeEditText = findViewById(R.id.gender_dropdown);
         usertypeEditText.setAdapter(adapter);
 
@@ -65,8 +63,9 @@ public class LoginActivity extends AppCompatActivity {
                             String uName = ds.child("username").getValue(String.class);
                             fName = ds.child("fullName").getValue(String.class);
                             String pass = ds.child("password").getValue(String.class);
-                            String utype = ds.child("userType").getValue(String.class);
-                            if (utype.equals(userType)) {
+                            String uType = ds.child("userType").getValue(String.class);
+                            if(uType != null && uName != null && pass != null)
+                            if (uType.equals(userType)) {
                                 if (uName.equals(username) && pass.equals(password)) {
                                     isCorrect = true;
                                     break;
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
 
-                        if (isCorrect) {
+                        if(isCorrect) {
                             username1 = username;
                             Intent intent;
                             switch (userType) {
@@ -103,11 +102,10 @@ public class LoginActivity extends AppCompatActivity {
                                     break;
 
                             }
-                            loginButton.setEnabled(true);
                         } else {
                             Toast.makeText(LoginActivity.this, "incorrect username or password", Toast.LENGTH_SHORT).show();
-                            loginButton.setEnabled(true);
                         }
+                        loginButton.setEnabled(true);
                     }
 
                     @Override
@@ -131,4 +129,9 @@ public class LoginActivity extends AppCompatActivity {
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
+    @Override
+    protected void onResume() {
+        adapter.getFilter().filter(null);
+        super.onResume();
+    }
 }

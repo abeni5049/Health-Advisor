@@ -56,6 +56,10 @@ public class MotherActivity extends AppCompatActivity {
             Intent intent = new Intent(MotherActivity.this,ProfileActivity.class);
             startActivity(intent);
         }
+        else if(id==R.id.item2){
+            Intent intent = new Intent(MotherActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 }

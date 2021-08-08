@@ -52,6 +52,10 @@ public class FpActivity extends AppCompatActivity {
             Intent intent = new Intent(FpActivity.this,ProfileActivity.class);
             startActivity(intent);
         }
+        else if(id==R.id.item2){
+            Intent intent = new Intent(FpActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 
