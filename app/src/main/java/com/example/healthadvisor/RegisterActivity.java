@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -68,53 +70,69 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(v -> {
-            String fullName = fullNameEditText.getText().toString();
-            String gender = editTextFilledExposedDropdown.getText().toString();
-            String dateOfBirth = dateTextField.getText().toString();
-            String phoneNumber = phoneNumberEditText.getText().toString();
-            String martialStatus = editTextFilledExposedDropdown3.getText().toString();
-            String userType = editTextFilledExposedDropdown2.getText().toString();
-            String username = usernameEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
+            String fullName = fullNameEditText.getText().toString().trim();
+            String gender = editTextFilledExposedDropdown.getText().toString().trim();
+            String dateOfBirth = dateTextField.getText().toString().trim();
+            String phoneNumber = phoneNumberEditText.getText().toString().trim();
+            String martialStatus = editTextFilledExposedDropdown3.getText().toString().trim();
+            String userType = editTextFilledExposedDropdown2.getText().toString().trim();
+            String username = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
+            if(fullName.isEmpty() ||
+                gender.isEmpty() ||
+                dateOfBirth.isEmpty() ||
+                phoneNumber.isEmpty() ||
+                martialStatus.isEmpty() ||
+                userType.isEmpty() ||
+                username.isEmpty() ||
+                password.isEmpty()){
+                Toast.makeText(this,"all fields are required",Toast.LENGTH_SHORT).show();
+            }else {
+                registerButton.setEnabled(false);
+                // Write a user to the database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef1 = database.getReference("users");
+                myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        boolean isTaken = false;
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            String str = ds.child("username").getValue(String.class);
+                            if (str.equals(username)) {
+                                isTaken = true;
+                                break;
+                            }
+                        }
 
-
-            // Write a user to the database
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef1 = database.getReference("users");
-            myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    boolean isTaken = false;
-                    for(DataSnapshot ds : snapshot.getChildren()) {
-                        String str = ds.child("username").getValue(String.class);
-                        if(str.equals(username)){
-                            isTaken = true;
-                            break;
+                        if (isTaken) {
+                            Toast.makeText(RegisterActivity.this, "this username is taken", Toast.LENGTH_SHORT).show();
+                        } else {
+                            DatabaseReference myRef = database.getReference("users").push();
+                            myRef.child("fullName").setValue(fullName);
+                            myRef.child("gender").setValue(gender);
+                            myRef.child("dateOfBirth").setValue(dateOfBirth);
+                            myRef.child("phoneNumber").setValue(phoneNumber);
+                            myRef.child("martialStatus").setValue(martialStatus);
+                            myRef.child("userType").setValue(userType);
+                            myRef.child("username").setValue(username);
+                            myRef.child("password").setValue(password).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    registerButton.setEnabled(true);
+                                    Toast.makeText(RegisterActivity.this, "successfully registered", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
 
-                    if(isTaken){
-                        Toast.makeText(RegisterActivity.this, "this username is taken", Toast.LENGTH_SHORT).show();
-                    }else {
-                        DatabaseReference myRef = database.getReference("users").push();
-                        myRef.child("fullName").setValue(fullName);
-                        myRef.child("gender").setValue(gender);
-                        myRef.child("dateOfBirth").setValue(dateOfBirth);
-                        myRef.child("phoneNumber").setValue(phoneNumber);
-                        myRef.child("martialStatus").setValue(martialStatus);
-                        myRef.child("userType").setValue(userType);
-                        myRef.child("username").setValue(username);
-                        myRef.child("password").setValue(password);
-                        Toast.makeText(RegisterActivity.this, "successfully registered", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
+                });
+            }
 
         });
 

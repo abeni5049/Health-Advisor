@@ -4,10 +4,10 @@
     android:padding="16dp"
     android:layout_width="match_parent"
     android:longClickable="true"
+    android:focusable="true"
     android:layout_height="100dp">
 
         <TextView
-            android:gravity="center"
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,6 +26,6 @@
             android:textSize="16sp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            />
+            android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.example.healthadvisor.ui.Post;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,10 +18,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.healthadvisor.DetailActivity;
 import com.example.healthadvisor.GridAdapter;
-import com.example.healthadvisor.LoginActivity;
 import com.example.healthadvisor.PhysicianActivity;
 import com.example.healthadvisor.R;
-import com.example.healthadvisor.databinding.FragmentPostBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,11 +32,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 
 public class PostFragment extends Fragment {
 
-    private FragmentPostBinding binding;
     ArrayList<String> title;
     ArrayList<String> info;
     ArrayList<String> author;
@@ -51,10 +53,11 @@ public class PostFragment extends Fragment {
         EditText infoEditText = root.findViewById(R.id.information_text_field);
         Button post = root.findViewById(R.id.post_button);
         post.setOnClickListener(v->{
+            post.setEnabled(false);
             String title = titleEditText.getText().toString();
             String info = infoEditText.getText().toString();
             Date todayDate = Calendar.getInstance().getTime();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
             String currentDateString = formatter.format(todayDate);
             String author = PhysicianActivity.physicianFullName;
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -63,7 +66,12 @@ public class PostFragment extends Fragment {
             myRef.child("info").setValue(info);
             myRef.child("date").setValue(currentDateString);
             myRef.child("author").setValue(author);
-            myRef.child("postID").setValue(myRef.getKey());
+            myRef.child("postID").setValue(myRef.getKey()).addOnCompleteListener(task -> {
+                Toast.makeText(getContext(), "successfully posted", Toast.LENGTH_SHORT).show();
+                titleEditText.setText("");
+                infoEditText.setText("");
+                post.setEnabled(true);
+            });
         });
 
         title = new ArrayList<>();
@@ -78,23 +86,36 @@ public class PostFragment extends Fragment {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("posts");
-        myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()) {
-                    String author_ = ds.child("author").getValue(String.class);
-                    if(author_.equals(PhysicianActivity.physicianFullName)) {
-                        String title_ = ds.child("title").getValue(String.class);
-                        String info_ = ds.child("info").getValue(String.class);
-                        String date_ = ds.child("date").getValue(String.class);
-                        String postID_ = ds.child("postID").getValue(String.class);
-                        title.add(title_);
-                        info.add(info_);
-                        author.add(author_);
-                        date.add(date_);
-                        postID.add(postID_);
-                        customAdapter.notifyDataSetChanged();
+                try {
+                    title.clear();
+                    info.clear();
+                    author.clear();
+                    date.clear();
+                    postID.clear();
+                    customAdapter.notifyDataSetChanged();
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        String author_ = ds.child("author").getValue(String.class);
+                        if(author_ == null){
+                            continue;
+                        }
+                        if (author_.equals(PhysicianActivity.physicianFullName)) {
+                            String title_ = ds.child("title").getValue(String.class);
+                            String info_ = ds.child("info").getValue(String.class);
+                            String date_ = ds.child("date").getValue(String.class);
+                            String postID_ = ds.child("postID").getValue(String.class);
+                            title.add(title_);
+                            info.add(info_);
+                            author.add(author_);
+                            date.add(date_);
+                            postID.add(postID_);
+                            customAdapter.notifyDataSetChanged();
+                        }
                     }
+                }catch (Exception e){
+                    Toast.makeText(getContext(), "error occurred , log out and try again", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -121,8 +142,17 @@ public class PostFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot ds:snapshot.getChildren()){
-                        if( ds.child("postID").getValue().toString().equals(postID.get(position)) ){
-                            ds.getRef().removeValue();
+                        if( Objects.requireNonNull(ds.child("postID").getValue()).toString().equals(postID.get(position)) ){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setPositiveButton("Yes", (dialog, id1) -> {
+                                ds.getRef().removeValue();
+                                Toast.makeText(getContext(), "post deleted", Toast.LENGTH_SHORT).show();
+                            });
+                            builder.setNegativeButton("No", (dialog, id12) -> dialog.cancel());
+                            AlertDialog dialog = builder.create();
+                            dialog.setTitle("Delete Post");
+                            dialog.setMessage("Do you want to delete this post?");
+                            dialog.show();
                         }
                     }
                 }
@@ -153,6 +183,5 @@ public class PostFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }

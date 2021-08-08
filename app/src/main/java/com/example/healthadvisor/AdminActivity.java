@@ -3,12 +3,15 @@ package com.example.healthadvisor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -37,9 +41,11 @@ public class AdminActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("users");
-        myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                username.clear();
+                adapter.notifyDataSetChanged();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         String uName = ds.child("username").getValue(String.class);
                         String uType = ds.child("userType").getValue(String.class);
@@ -54,6 +60,8 @@ public class AdminActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
         ArrayList<String> metricsList = new ArrayList<>();
@@ -158,8 +166,20 @@ public class AdminActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot ds:snapshot.getChildren()){
-                        if( ds.child("username").getValue().toString().equals(username.get(position)) ){
-                            ds.getRef().removeValue();
+                        String usernameStr = Objects.requireNonNull(ds.child("username").getValue()).toString();
+                        if( usernameStr.equals(username.get(position)) ){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(AdminActivity.this);
+                            builder.setPositiveButton("Yes", (dialog, id1) -> {
+                                ds.getRef().removeValue();
+                                Toast.makeText(getApplicationContext(), "account deleted", Toast.LENGTH_SHORT).show();
+                            });
+                            builder.setNegativeButton("No", (dialog, id12) -> {
+                                dialog.cancel();
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.setTitle("Delete User");
+                            dialog.setMessage("Do you want to delete Account of "+usernameStr+" ?");
+                            dialog.show();
                         }
                     }
                 }

@@ -15,9 +15,9 @@
         app:cardCornerRadius="16dp"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:checkable="true"
+        android:clickable="false"
+        android:focusable="false"
+        android:checkable="false"
         >
 
         <LinearLayout
