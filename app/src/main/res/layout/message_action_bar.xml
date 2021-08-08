@@ -8,15 +8,15 @@
 
     <TextView
         android:id="@+id/profile_picture"
-        android:text="A"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center_vertical"
+        android:background="@drawable/profile_circle_mini"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:textColor="@android:color/white"
-        android:background="@drawable/profile_circle_mini"
-        />
+        android:text="A"
+        android:textSize="20sp"
+        android:textColor="@android:color/white" />
 
     <RelativeLayout
         android:layout_toRightOf="@id/profile_picture"
@@ -26,15 +26,15 @@
         android:paddingLeft="16dp">
 
         <TextView
-            android:layout_centerVertical="true"
-            android:text="Dr. Abel"
+            android:id="@+id/username_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:fontFamily="sans-serif-medium'"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:text="Dr. Abel"
             android:textColor="@color/white"
-            />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 
 

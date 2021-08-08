@@ -55,7 +55,7 @@ public class ChatsFragment extends Fragment {
                     String utype = ds.child("userType").getValue(String.class);
                     if(utype.equals("Physician") ||utype.equals("FP Worker")  ) {
                         userName.add(uname);
-                        latestMessage.add("Thank you for your advice");
+                        latestMessage.add("");
                         usertype.add(utype);
                         adapter.notifyDataSetChanged();
                     }

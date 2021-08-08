@@ -65,7 +65,7 @@ public class Chats2Fragment extends Fragment {
                                     username = usernames[0];
                                 }
                                 userName.add(username);
-                                latestMessage.add("Thank you for your advice");
+                                latestMessage.add("");
                                 usertype.add("Mother");
                                 adapter.notifyDataSetChanged();
                             }

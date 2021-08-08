@@ -22,12 +22,11 @@
             />
 
         <TextView
-            android:text="how are you doing"
             android:id="@+id/latest_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            />
+            android:text="" />
     </RelativeLayout>
 
     <TextView
