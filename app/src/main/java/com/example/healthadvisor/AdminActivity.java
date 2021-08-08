@@ -5,15 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -72,7 +67,6 @@ public class AdminActivity extends AppCompatActivity {
             int numberOfUsers=0,numberOfMothers=0,numberOfPhysicians=0,numberOfFpWorkers=0,numberOfAdmins=0;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Toast.makeText(getApplicationContext(), String.valueOf(snapshot.getChildrenCount()), Toast.LENGTH_SHORT).show();
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     String uType = ds.child("userType").getValue(String.class);
                     switch (uType){
