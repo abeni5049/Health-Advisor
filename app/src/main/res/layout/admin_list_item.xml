@@ -3,36 +3,29 @@
     android:orientation="horizontal"
     android:padding="16dp"
     android:layout_width="match_parent"
+    android:longClickable="true"
     android:layout_height="100dp">
 
-    <LinearLayout
-        android:gravity="center"
-        android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
         <TextView
             android:gravity="center"
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dr. abel"
+            android:text="birke worku"
+            android:layout_centerVertical="true"
             android:textStyle="bold"
             android:textSize="16sp"
             />
 
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/delete_account_button"
-        android:padding="8dp"
-        android:text="Delete"
-        android:textSize="16sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:layout_alignParentRight="true"
-        />
+        <TextView
+            android:id="@+id/user_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mother"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
 
 </RelativeLayout>

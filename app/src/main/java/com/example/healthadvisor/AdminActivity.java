@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -19,15 +21,18 @@ import java.util.ArrayList;
 
 public class AdminActivity extends AppCompatActivity {
 
+    ArrayList<String> username;
+    ArrayList<String> userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         getSupportActionBar().setTitle("Admin");
+        
+        username = new ArrayList<>();
+        userType = new ArrayList<>();
 
-        ArrayList<String> username = new ArrayList<>();
-
-        AdminListAdapter adapter = new AdminListAdapter(this,username);
+        AdminListAdapter adapter = new AdminListAdapter(this,username,userType);
         ListView list = findViewById(R.id.admin_list);
         list.setAdapter(adapter);
 
@@ -36,11 +41,13 @@ public class AdminActivity extends AppCompatActivity {
         myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()) {
-                    String uname = ds.child("username").getValue(String.class);
-                    username.add(uname);
-                    adapter.notifyDataSetChanged();
-                }
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        String uName = ds.child("username").getValue(String.class);
+                        String uType = ds.child("userType").getValue(String.class);
+                        username.add(uName);
+                        userType.add(uType);
+                        adapter.notifyDataSetChanged();
+                    }
             }
 
             @Override
@@ -50,7 +57,13 @@ public class AdminActivity extends AppCompatActivity {
         });
 
 
-        String numberOfPosts;
+        ArrayList<String> metricsList = new ArrayList<>();
+        ArrayList<String> valueList = new ArrayList<>();
+
+        AdminListAdapter reportAdapter = new AdminListAdapter(this,metricsList,valueList);
+        ListView reportList = findViewById(R.id.report_list);
+        reportList.setAdapter(reportAdapter);
+
         myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             int numberOfUsers=0,numberOfMothers=0,numberOfPhysicians=0,numberOfFpWorkers=0,numberOfAdmins=0;
             @Override
@@ -73,18 +86,23 @@ public class AdminActivity extends AppCompatActivity {
                             break;
                     }
                 }
-                TextView totalUsersText = findViewById(R.id.total_number_of_users);
                 String numberOfUsersStr = String.valueOf(snapshot.getChildrenCount());
                 String numberOfAdminsStr = String.valueOf(numberOfAdmins);
                 String numberOfMothersStr = String.valueOf(numberOfMothers);
                 String numberOfFpWorkersStr = String.valueOf(numberOfFpWorkers);
                 String numberOfPhysiciansStr = String.valueOf(numberOfPhysicians);
-                String metrics = "\n Total number Of Users: "+numberOfUsersStr+
-                        "\nTotal Number Of Mothers: "+numberOfMothersStr
-                        +"\nTotal Number Of FP Workers:  "+numberOfFpWorkersStr
-                        +"\nTotal Number Of Physicians:  "+numberOfPhysiciansStr
-                        + "\nTotal Number Of Admins:  "+numberOfAdminsStr;
-                totalUsersText.setText(metrics);
+
+                metricsList.add("total Number Of users");
+                valueList.add(numberOfUsersStr);
+                metricsList.add("total number Of mothers");
+                valueList.add(numberOfMothersStr);
+                metricsList.add("total number Of FP workers");
+                valueList.add(numberOfFpWorkersStr);
+                metricsList.add("total number Of physicians");
+                valueList.add(numberOfPhysiciansStr);
+                metricsList.add("total number Of admins");
+                valueList.add(numberOfAdminsStr);
+                reportAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -97,9 +115,9 @@ public class AdminActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                TextView textView = findViewById(R.id.total_number_of_posts);
                 String numberOfPosts = String.valueOf(snapshot.getChildrenCount());
-                textView.setText("Total number of posts "+numberOfPosts);
+                metricsList.add("total number of posts");
+                valueList.add(numberOfPosts);
             }
 
             @Override
@@ -113,8 +131,8 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String numberOfAppointments = String.valueOf(snapshot.getChildrenCount());
-                TextView textView = findViewById(R.id.total_number_of_appointment);
-                textView.setText("Total Number Of Appointments: "+numberOfAppointments);
+                metricsList.add("total number of appointments");
+                valueList.add(numberOfAppointments);
             }
 
             @Override
@@ -135,6 +153,29 @@ public class AdminActivity extends AppCompatActivity {
         spec.setContent(R.id.tab2);
         spec.setIndicator("report");
         tabs.addTab(spec);
+        
+        list.setOnItemLongClickListener((parent, view, position, id) -> {
+            DatabaseReference ref1 = database.getReference("users");
+            ref1.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot ds:snapshot.getChildren()){
+                        if( ds.child("username").getValue().toString().equals(username.get(position)) ){
+                            ds.getRef().removeValue();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            return false;
+        });
+
+
 
 
     }

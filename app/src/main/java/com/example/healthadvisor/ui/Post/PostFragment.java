@@ -115,6 +115,27 @@ public class PostFragment extends Fragment {
             startActivity(intent);
         });
 
+        simpleGrid.setOnItemLongClickListener((parent, view, position, id) -> {
+            DatabaseReference ref1 = database.getReference("posts");
+            ref1.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot ds:snapshot.getChildren()){
+                        if( ds.child("postID").getValue().toString().equals(postID.get(position)) ){
+                            ds.getRef().removeValue();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            return false;
+        });
+
         TabHost tabs = root.findViewById(R.id.tabhost);
         tabs.setup();
         TabHost.TabSpec spec = tabs.newTabSpec("tag1");
