@@ -1,6 +1,4 @@
 package com.example.healthadvisor.ui.Posts;
-//TODO empty list view
-//TODO progress bar
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +39,7 @@ public class PostsFragment extends Fragment {
 
         binding = FragmentPostsBinding.inflate(inflater, container, false);
 
+
         title = new ArrayList<>();
         info = new ArrayList<>();
         author = new ArrayList<>();
@@ -51,11 +51,14 @@ public class PostsFragment extends Fragment {
         GridAdapter customAdapter = new GridAdapter(getContext(), title,info,author,date,postID);
         simpleGrid.setAdapter(customAdapter);
 
+        ProgressBar progressBar = rootView.findViewById(R.id.progress_bar);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("posts");
         myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                progressBar.setVisibility(View.VISIBLE);
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     String title_ = ds.child("title").getValue(String.class);
                     String info_ = ds.child("info").getValue(String.class);
@@ -68,6 +71,7 @@ public class PostsFragment extends Fragment {
                     date.add(date_);
                     postID.add(postID_);
                     customAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
 
